@@ -49,7 +49,7 @@ function reducer(state, action) {
 
 async function fetch(dispatch) {
     try {
-        const response = await axios.get("https://76ztw3hm-3001.euw.devtunnels.ms/users");
+        const response = await axios.get("http://localhost:3001/users");
         setTimeout(() => {
             dispatch({ type: "FETCH_SUCCESS", payload: response.data });
         }, 2000);

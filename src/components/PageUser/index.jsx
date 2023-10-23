@@ -12,7 +12,7 @@ export default function PageUser({}) {
     async function fetch() {
         try {
             const response = await axios.get(
-                "https://76ztw3hm-3001.euw.devtunnels.ms/users?login=" + username
+                "http://localhost:3001/users?login=" + username
             );
             setUser(response.data[0]);
         } catch (e) {
