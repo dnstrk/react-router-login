@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import cl from "./index.module.css";
 import { Container } from "@mui/material";
 
-export default function Header({ isLoggedIn, dispatch }) {
+export default function Header({ isLoggedIn, dispatch, setPrivacy, randomPrivacy }) {
     function logout() {
+        setPrivacy(randomPrivacy())
         dispatch({type: "USER_LOGON", payload: false})
 
     }

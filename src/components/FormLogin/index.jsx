@@ -7,9 +7,14 @@ export default function FormLogin({
     currentUser,
     setCurrentUser,
     logonUser,
+    privacy,
+    setPrivacy,
+    randomPrivacy,
     dispatch,
 }) {
     const [check, setCheck] = useState(true);
+
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -20,11 +25,15 @@ export default function FormLogin({
     function checker() {
         setCheck(false);
     }
-
     function login() {
         setCurrentUser({ ...currentUser, login: "", password: "" });
         dispatch({ type: "USER_LOGON", payload: true });
     }
+
+    useEffect(()=>{
+        setPrivacy(randomPrivacy())
+    },[logonUser])
+
 
     return (
         <Container maxWidth="md">
@@ -63,7 +72,7 @@ export default function FormLogin({
                             <button className={cl.register}>Register</button>
                         </Link>
                         {currentUser.login == logonUser ? (
-                            <Link to={"/" + logonUser}>
+                            <Link to={"/"+ privacy + "/" + logonUser}>
                                 <button className={cl.login} onClick={login}>
                                     Login
                                 </button>

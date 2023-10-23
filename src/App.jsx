@@ -8,6 +8,7 @@ import PageUser from "./components/PageUser";
 import FormLogin from "./components/FormLogin";
 import FormRegister from "./components/FormRegister";
 import Header from "./components/Header";
+import PageNotFound from "./components/PageNotFound";
 
 const initialState = {
     users: {},
@@ -42,8 +43,8 @@ function reducer(state, action) {
         case "USER_LOGON":
             return {
                 ...state,
-                isLoggedIn: action.payload
-            }
+                isLoggedIn: action.payload,
+            };
     }
 }
 
@@ -64,9 +65,23 @@ function App() {
         login: "",
         password: "",
     });
-
+    const [privacy, setPrivacy] = useState();
+    
     useEffect(() => {
         fetch(dispatch);
+    }, []);
+
+    function randomPrivacy() {
+        const alpt = "abcdefghijklmnopqrstuvwxyz";
+        let varPrivacy = "";
+        while (varPrivacy.length < 6) {
+            varPrivacy += alpt[Math.floor(Math.random() * alpt.length)];
+        }
+        return varPrivacy;
+    }
+
+    useEffect(() => {
+        setPrivacy(randomPrivacy());
     }, []);
 
     useEffect(() => {
@@ -82,12 +97,15 @@ function App() {
         }
     }, [currentUser]);
 
-    console.log(state.isLoggedIn)
-
     return (
         <>
-            <Header isLoggedIn={state.isLoggedIn} dispatch={dispatch}/>
-
+            <Header
+                isLoggedIn={state.isLoggedIn}
+                privacy={privacy}
+                setPrivacy={setPrivacy}
+                randomPrivacy={randomPrivacy}
+                dispatch={dispatch}
+            />
             <Routes>
                 <Route path="/" element={<PageHome />} />
                 <Route path="/about" element={<PageAbout />} />
@@ -99,12 +117,18 @@ function App() {
                             setCurrentUser={setCurrentUser}
                             logonUser={state.logonUser}
                             dispatch={dispatch}
+                            privacy={privacy}
+                            setPrivacy={setPrivacy}
+                            randomPrivacy={randomPrivacy}
                         />
                     }
                 />
                 <Route path="/FormRegister" element={<FormRegister />} />
-                <Route path="/:username" element={<PageUser currentUser={currentUser}/>} />
-                <Route path="*" />
+                <Route
+                    path={"/"+ privacy + "/:username"}
+                    element={<PageUser currentUser={currentUser} />}
+                />
+                <Route path="*" element={<PageNotFound />} />
             </Routes>
         </>
     );
