@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "login": "dtrukhin",
+            "password": "ZZZZ1111zzzz"
+        },
+        {
+            "id": 2,
+            "login": "afirsov",
+            "password": "ZZZZ1111zzzz"
+        },
+        {
+            "id": 3,
+            "login": "ekarataeva",
+            "password": "ZZZZ1111zzzz"
+        }
+    ]
+}

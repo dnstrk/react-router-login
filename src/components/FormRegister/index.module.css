@@ -1,0 +1,52 @@
+.formWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    gap: 10px;
+    width: 30%;
+}
+
+.uName {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pass {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+.submit {
+    padding: 2px 10px;
+    border: 1px #000 solid;
+    border-radius: 20px;
+
+    transition: 0.2s;
+}
+
+.submit:hover {
+    cursor: pointer;
+    color: blue;
+    border-color: #c9c9c9;
+
+    transform: scale(105%);
+}
