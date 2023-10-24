@@ -12,6 +12,7 @@ import PageNotFound from "./components/PageNotFound";
 
 const initialState = {
     users: {},
+    posts: {},
     err: false,
     isLoading: true,
     logonUser: null,
@@ -24,10 +25,16 @@ const initialState = {
 
 function reducer(state, action) {
     switch (action.type) {
-        case "FETCH_SUCCESS":
+        case "FETCH_USERS":
             return {
                 ...state,
                 users: action.payload,
+                isLoading: false,
+            };
+        case "FETCH_POSTS":
+            return {
+                ...state,
+                posts: action.payload,
                 isLoading: false,
             };
         case "FETCH_ERROR":
@@ -50,10 +57,10 @@ function reducer(state, action) {
 
 async function fetch(dispatch) {
     try {
-        const response = await axios.get("http://localhost:3001/users");
-        setTimeout(() => {
-            dispatch({ type: "FETCH_SUCCESS", payload: response.data });
-        }, 2000);
+        const responseUsers = await axios.get("http://localhost:3001/users");
+        const responsePosts = await axios.get("http://localhost:3001/posts");
+        dispatch({ type: "FETCH_USERS", payload: responseUsers.data });
+        dispatch({ type: "FETCH_POSTS", payload: responsePosts.data });
     } catch (e) {
         dispatch({ type: "FETCH_ERROR", payload: e.message });
     }
@@ -66,7 +73,7 @@ function App() {
         password: "",
     });
     const [privacy, setPrivacy] = useState();
-    
+
     useEffect(() => {
         fetch(dispatch);
     }, []);
@@ -101,13 +108,22 @@ function App() {
         <>
             <Header
                 isLoggedIn={state.isLoggedIn}
+                logonUser={state.logonUser}
                 privacy={privacy}
                 setPrivacy={setPrivacy}
                 randomPrivacy={randomPrivacy}
                 dispatch={dispatch}
             />
             <Routes>
-                <Route path="/" element={<PageHome />} />
+                <Route
+                    path="/"
+                    element={
+                        <PageHome
+                            isLoggedIn={state.isLoggedIn}
+                            posts={state.posts}
+                        />
+                    }
+                />
                 <Route path="/about" element={<PageAbout />} />
                 <Route
                     path="/FormLogin"
@@ -125,9 +141,10 @@ function App() {
                 />
                 <Route path="/FormRegister" element={<FormRegister />} />
                 <Route
-                    path={"/"+ privacy + "/:username"}
+                    path={"/" + privacy + "/:username"}
                     element={<PageUser currentUser={currentUser} />}
                 />
+
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
         </>

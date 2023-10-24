@@ -38,7 +38,7 @@ export default function FormLogin({
     return (
         <Container maxWidth="md">
             <div className={cl.formWrap}>
-                <div>Login</div>
+                <b>Login</b>
                 <div className={cl.inputForm}>
                     <div className={cl.uName}>
                         <span>Login:</span>

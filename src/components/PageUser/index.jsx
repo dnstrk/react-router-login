@@ -2,8 +2,7 @@ import { Container } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-
-
+import cl from './index.module.css'
 
 export default function PageUser({}) {
     const { username } = useParams();
@@ -22,16 +21,17 @@ export default function PageUser({}) {
 
     useEffect(() => {
         fetch();
-    },[]);
+    }, []);
+
+    function test() {
+        console.log(user)
+    }
 
     return (
         <Container maxWidth="md">
-            <div>
-                {user.login == 'afirsov'?
-                <span>Здарова, свин</span>:<span>{user.login}, welcome to your personal page</span>   
-            }
-                    
-
+            <div className={cl.userWrap}>
+                <span>{user.login}, welcome to your personal page</span>
+                <button onClick={test}>test</button>
             </div>
         </Container>
     );

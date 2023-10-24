@@ -2,12 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import cl from "./index.module.css";
 import { Container } from "@mui/material";
+import Home from "@mui/icons-material/Home";
 
-export default function Header({ isLoggedIn, dispatch, setPrivacy, randomPrivacy }) {
+export default function Header({
+    isLoggedIn,
+    dispatch,
+    privacy,
+    setPrivacy,
+    randomPrivacy,
+    logonUser,
+}) {
+
+
     function logout() {
-        setPrivacy(randomPrivacy())
-        dispatch({type: "USER_LOGON", payload: false})
-
+        setPrivacy(randomPrivacy());
+        dispatch({ type: "USER_LOGON", payload: false });
     }
 
     return (
@@ -26,12 +35,21 @@ export default function Header({ isLoggedIn, dispatch, setPrivacy, randomPrivacy
                         </ul>
                     </nav>
                     {isLoggedIn ? (
-                        <Link to="/FormLogin">
-                            <button className={cl.login} onClick={logout}>Logout</button>
-                        </Link>
+                        <div className={cl.actionWrap}>
+                            <Link to="/">
+                                <button className={cl.login} onClick={logout}>
+                                    Logout
+                                </button>
+                            </Link>
+                            <Link to={"/" + privacy + "/" + logonUser}>
+                                <Home />
+                            </Link>
+                        </div>
                     ) : (
                         <Link to="/FormLogin">
-                            <button className={cl.login}>Login</button>
+                            <button className={cl.login}>
+                                Login
+                            </button>
                         </Link>
                     )}
                 </div>

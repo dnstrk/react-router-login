@@ -1,0 +1,11 @@
+.aboutWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 24px;
+}

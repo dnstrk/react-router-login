@@ -1,0 +1,26 @@
+.notFoundWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.title {
+    font-size: 30px;
+    color: #c0c0c0;
+    margin-bottom: 50px;
+}
+
+.text {
+    font-size: 24px;
+    color: #292929;
+    margin-bottom: 50px;
+}
+
+.homeLink {
+    color: aquamarine;
+    transition: .3s;
+}
+.homeLink:hover {
+    color: rgb(212, 183, 53);
+}

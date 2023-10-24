@@ -43,3 +43,10 @@
     border-color: #c9c9c9;
     transform: scale(105%);
 }
+
+.actionWrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
